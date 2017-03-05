@@ -1,0 +1,3 @@
+Create a new service for Openstack.
+Federation? Need to look at source code.
+Peace out Peeps.
