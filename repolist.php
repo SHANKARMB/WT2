@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Contact Us</title>
+<title>Project Hub</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Deliccio Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/repolist.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/login.js"></script>
+<script src="js/repolist.js"></script>
 <!-- //js -->
+<link href='https://fonts.googleapis.com/css?family=UnifrakturMaguntia' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:600,600italic,700,400' rel='stylesheet' type='text/css'>
 <!-- FlexSlider -->
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 <script defer src="js/jquery.flexslider.js"></script>
@@ -32,9 +38,9 @@
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 </head>
 	
-<body>
+<body onload="fillTable()">
 <!-- banner -->
-	<div class="banner1">
+	<div class="banner">
 		<div class="container">
 			<div class="header-nav">
 				<nav class="navbar navbar-default">
@@ -53,31 +59,51 @@
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-					  <ul class="nav navbar-nav">
+					 <ul class="nav navbar-nav">
 						<li><a class="btn" href="index.php">Home</a></li>
 						<li><a class="btn" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Code It!</a></li>
-						<li class="active"><a class="btn" href="contact.php">Contact Us</a></li>
+						<li><a class="btn" href="contact.php">Contact Us</a></li>
 					  </ul>
 					</div><!-- /.navbar-collapse -->
 				</nav>
 			</div>
+				<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Repository List</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+					</div>
+					<table class="table table-hover" id="dev-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Owner</th>
+								<th>Repository</th>
+							</tr>
+						</thead>
+						<tbody id="repolist">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</div>
+			<div class="banner-info">
+				
+			</div>
 		</div>
 	</div>
 <!-- //banner -->
-<!-- contact -->
-	<div class="contact">
-		<div class="container">
-			<h3>Contact Us</h3>
-			<div class="line">
-			</div>
-			<p class="proident">
-				Preetham M G<br/>
-				Shankar M B<br/>
-				Varun L Pai<br/>
-			</p>
-		</div>
-	</div>
-<!-- //contact -->
+
+<!-- Modal -->
 <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -130,7 +156,7 @@
             <div class="control-group">
               <label class="control-label" for="userid">Username:</label>
               <div class="controls">
-                <input id="userid" name="userid" class="form-control" type="text" placeholder="Enter Username" class="input-large" required="">
+                <input id="newuserid" name="newuserid" class="form-control" type="text" placeholder="Enter Username" class="input-large" required="">
               </div>
             </div>
             
@@ -141,7 +167,7 @@
                 <input id="password" name="password" class="form-control" type="password" placeholder="Enter Password" class="input-large" required="">
     
               </div>
-            </div> 
+            </div>
             
             <!-- Button -->
             <div class="control-group">
@@ -149,7 +175,7 @@
               <div class="controls">
                 <button id="confirmsignup" onclick="signup()" name="confirmsignup" class="btn btn-success">Sign Up</button>
 				<div id="errorsignup" style="color:red;float: right"> </div>
-			  </div>
+              </div>
             </div>
             
       </div>
@@ -163,7 +189,6 @@
     </div>
   </div>
   </div>
-<!-- //banner -->
 	<div class="footer">
 		<div class="container">
 			<div class="footer-row">
