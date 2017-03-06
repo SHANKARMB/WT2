@@ -52,3 +52,16 @@ function signup(){
 	xhr.open("GET","data/users.txt",true );
 	xhr.send();
 }
+
+function checkuserexists(user){
+	$("#errorsignup").html("");
+	var xhr=new XMLHttpRequest();
+	xhr.open("GET","scripts/checkuser.php?username="+user,true);
+	xhr.onreadystatechange=function(){
+		if(this.readyState==4 && this.status==200){
+			if(this.responseText=="true")
+				$("#errorsignup").html("User exists");
+		}
+	};
+	xhr.send();
+}

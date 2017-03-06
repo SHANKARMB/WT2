@@ -138,7 +138,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="control-group">
               <label class="control-label" for="userid">Username:</label>
               <div class="controls">
-                <input id="newuserid" name="newuserid" class="form-control" type="text" placeholder="Enter Username" class="input-large" required="">
+                <input id="newuserid" name="newuserid" class="form-control" type="text" placeholder="Enter Username" class="input-large" required="" onchange="checkuserexists(value)">
               </div>
             </div>
             
