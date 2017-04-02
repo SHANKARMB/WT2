@@ -50,12 +50,18 @@ $(function(){
 
 function fillTable(){
 	var count=0;
-	xhr=new XMLHttpRequest();
+	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4 && xhr.status==200){
+		if(this.readyState==4 && this.status==200){
 			list=xhr.responseText.split(';');
 			for(i=0;i<list.length;i++){
-				newRequest();
+				var xhr1=new XMLHttpRequest();
+				xhr1.onreadystatechange=function(){
+					if(this.readyState==4 && this.status==200)
+						updateTable(list,i,this.responseText);
+				};
+				xhr1.open("GET","data/"+list[i].split(':')[1]+"-Auth.txt",true);
+				xhr1.send();
 			}
 		}
 	};
@@ -63,24 +69,25 @@ function fillTable(){
 	xhr.send();
 }
 
-function newRequest(){
-	xhr1=new XMLHttpRequest();
-	xhr1.onreadystatechange=updateTable(list,i);
-	xhr1.open("GET","data/"+list[i].split(':')[1]+"-Auth.txt",true);
-	xhr1.send();
-}
+// function newRequest(){
+// 	xhr1=new XMLHttpRequest();
+// 	xhr1.onreadystatechange=function(){
+// 								updateTable(list,i);
+// 							}
+// 	xhr1.open("GET","data/"+list[i].split(':')[1]+"-Auth.txt",true);
+// 	xhr1.send();
+// }
 
-function updateTable(list,i){
-	if(xhr1.readyState==4 && xhr1.status==200){
-		authuser=xhr1.responseText.split(';');
-		alert(xhr1.responseText);
-		for(j=0;j<authuser.length;j++){
-			if(sessionStorage["user"]==authuser[j]){
+function updateTable(list,i,resp){
+	authuser=resp.split(';');
+	for(j=0;j<authuser.length;j++)
+	{
+		if(sessionStorage["user"]==authuser[j])
+		{
 			var repotable=document.getElementById("repolist");
 			var row=document.createElement("tr");
-			row.innerHTML="<td>"+(count++)+"</td><td>"+list[i].split(':')[0]+"</td><td><a href='authview.php?repo="+list[i].split(':')[1]+"'>"+list[i].split(':')[1]+"</a></td>";
+			row.innerHTML="<td>"+(j)+"</td><td>"+list[i].split(':')[0]+"</td><td><a href='authview.php?repo="+list[i].split(':')[1]+"'>"+list[i].split(':')[1]+"</a></td>";
 			repotable.appendChild(row);
-			}							
 		}
 	}
 }
