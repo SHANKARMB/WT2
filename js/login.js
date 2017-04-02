@@ -42,8 +42,8 @@ function signup(){
 				var user=document.getElementById("newuserid").value;
 				var passwd=document.getElementById("password").value;
 				var xhr1=new XMLHttpRequest();
-				xhr.open("POST","scripts/register.php",true );
-				xhr.send("register="+user+":"+passwd);
+				xhr.open("GET","scripts/register.php?register="+user+":"+passwd,true );
+				xhr.send();
 				localStorage.setItem("user", user);
 				window.location.href= 'home.php';
 			}

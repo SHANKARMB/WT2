@@ -1,6 +1,10 @@
 <?php
-extract($_POST);
-$file=fopen("data/users.txt","a");
+extract($_GET);
+$file=fopen("../data/users.txt","a");
 fwrite($file,';'.$register);
+fclose($file);
+$temp=explode(":",$register);
+$file=fopen("../data/".$temp[0].".txt","w");
+fwrite($file,'');
 fclose($file);
 ?>

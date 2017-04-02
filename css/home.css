@@ -1,0 +1,29 @@
+.navbar-login
+{
+    width: 305px;
+    padding: 50px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 50px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
+.navbar
+{
+	background-color: #87ceeb;
+}
+
+.navbar-brand
+{
+	font-size: 2em;
+	font-family: Comic Sans MS;
+}

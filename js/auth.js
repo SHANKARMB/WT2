@@ -48,39 +48,23 @@ $(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 })
 
-function getUrlVars() {
-var vars = {};
-var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-vars[key] = value;
-});
-return vars;
-}
-
 function fillTable(){
-	var path = getUrlVars()["repo"];
-	var repoheading=document.getElementById("repoheading");
-	repoheading.innerHTML=path;	
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			filelist=xhr.responseText.split(';');
-			var repocontent=document.getElementById("repocontent");
-			for(i=0;i<filelist.length;i++){
-				var xhr1=new XMLHttpRequest();
-				var temppath=filelist[i];
-				localStorage.setItem("filepath",filelist[i]);
-				xhr1.onreadystatechange=function(){
-					if(xhr1.readyState==4 && xhr1.status==200){
-						var row=document.createElement("tr");
-						row.innerHTML="<td><a href='"+"data/"+path+"/"+localStorage["filepath"]+"' download>"+localStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
-						repocontent.appendChild(row);
-					}
+			var repolist=xhr.responseText.split(';');
+			var count=1;
+			var repotable=document.getElementById("repolist");
+			for(i=0;i<repolist.length;i++){
+				var authlist=repolist[i].split(':');
+				if(authlist[0]=="Auth"){
+					var row=document.createElement("tr");
+					row.innerHTML="<td>"+(count++)+"</td><td>"+authlist[1]+"</td><td><a href='authview.php?repo="+authlist[1]+"'>"+authlist[1]+"</a></td>";
+					repotable.appendChild(row);
 				}
-				xhr1.open("GET","data/"+path+"/"+filelist[i],false);
-				xhr1.send();
 			}
 		}
 	};
-	xhr.open("GET","data/"+path+".txt",true);
+	xhr.open("GET","data/"+localStorage["user"]+".txt",true);
 	xhr.send();
 }
