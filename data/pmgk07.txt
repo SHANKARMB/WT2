@@ -1,1 +1,0 @@
-Own:CNS-Project;Own:DS-Project;Auth:Openstack-Project;Auth:WT2-Project
