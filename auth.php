@@ -9,7 +9,7 @@
 	<!--JavaScript-->
 	<script>
 		function load(){
-			$(".username").html(localStorage["user"]);
+			$(".username").html(sessionStorage["user"]);
 			fillTable();
 		}
 	</script>
@@ -51,8 +51,8 @@
 						<ul class="dropdown-menu">
 							<li class="divider"></li>
 							<li>
-								<div class="navbar-login navbar-login-session">
-									<div class="row">
+								<div class="navbar-login navbar-login-session" style="width: 305px; padding: 50px; padding-bottom: 0px;">
+									<div class="row" style="margin-top:-25%; padding: 0 0; width: 120%">
 										<div class="col-lg-12">
 											<p>
 												<a href="index.php" class="btn btn-danger btn-block">Logout</a>

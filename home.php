@@ -8,7 +8,7 @@
 	<!--JavaScript-->
 	<script>
 		function load(){
-			$(".username").html(localStorage["user"]);
+			$(".username").html(sessionStorage["user"]);
 		}
 	</script>
 	<script src="js/jquery-1.11.1.min.js"></script>

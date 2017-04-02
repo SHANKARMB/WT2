@@ -68,11 +68,11 @@ function fillTable(){
 			for(i=0;i<filelist.length;i++){
 				var xhr1=new XMLHttpRequest();
 				var temppath=filelist[i];
-				localStorage.setItem("filepath",filelist[i]);
+				sessionStorage.setItem("filepath",filelist[i]);
 				xhr1.onreadystatechange=function(){
 					if(xhr1.readyState==4 && xhr1.status==200){
 						var row=document.createElement("tr");
-						row.innerHTML="<td><a href='"+"data/"+path+"/"+localStorage["filepath"]+"' download>"+localStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
+						row.innerHTML="<td><a href='"+"data/"+path+"/"+sessionStorage["filepath"]+"' download>"+sessionStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
 						repocontent.appendChild(row);
 					}
 				}

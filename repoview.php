@@ -171,7 +171,7 @@
 							<div class="control-group">
 								<label class="control-label" for="confirmsignup"></label>
 								<div class="controls">
-									<button id="confirmsignup" onclick="signup()" name="confirmsignup" class="btn btn-success">Sign Up</button>
+									<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
 									<div id="errorsignup" style="color:red;float: right"> </div>
 								</div>
 							</div>

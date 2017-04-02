@@ -49,22 +49,38 @@ $(function(){
 })
 
 function fillTable(){
-	var xhr=new XMLHttpRequest();
+	var count=0;
+	xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			var repolist=xhr.responseText.split(';');
-			var count=1;
-			var repotable=document.getElementById("repolist");
-			for(i=0;i<repolist.length;i++){
-				var authlist=repolist[i].split(':');
-				if(authlist[0]=="Auth"){
-					var row=document.createElement("tr");
-					row.innerHTML="<td>"+(count++)+"</td><td>"+authlist[1]+"</td><td><a href='authview.php?repo="+authlist[1]+"'>"+authlist[1]+"</a></td>";
-					repotable.appendChild(row);
-				}
+			list=xhr.responseText.split(';');
+			for(i=0;i<list.length;i++){
+				newRequest();
 			}
 		}
 	};
-	xhr.open("GET","data/"+localStorage["user"]+".txt",true);
+	xhr.open("GET","data/repolist.txt",true);
 	xhr.send();
+}
+
+function newRequest(){
+	xhr1=new XMLHttpRequest();
+	xhr1.onreadystatechange=updateTable(list,i);
+	xhr1.open("GET","data/"+list[i].split(':')[1]+"-Auth.txt",true);
+	xhr1.send();
+}
+
+function updateTable(list,i){
+	if(xhr1.readyState==4 && xhr1.status==200){
+		authuser=xhr1.responseText.split(';');
+		alert(xhr1.responseText);
+		for(j=0;j<authuser.length;j++){
+			if(sessionStorage["user"]==authuser[j]){
+			var repotable=document.getElementById("repolist");
+			var row=document.createElement("tr");
+			row.innerHTML="<td>"+(count++)+"</td><td>"+list[i].split(':')[0]+"</td><td><a href='authview.php?repo="+list[i].split(':')[1]+"'>"+list[i].split(':')[1]+"</a></td>";
+			repotable.appendChild(row);
+			}							
+		}
+	}
 }
