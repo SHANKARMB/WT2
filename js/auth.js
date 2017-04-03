@@ -55,12 +55,13 @@ function fillTable(){
 		if(this.readyState==4 && this.status==200){
 			list=xhr.responseText.split(';');
 			for(i=0;i<list.length;i++){
+				url1="data/"+list[i].split(':')[1]+"-Auth.txt";
 				var xhr1=new XMLHttpRequest();
 				xhr1.onreadystatechange=function(){
 					if(this.readyState==4 && this.status==200)
-						updateTable(list,i,this.responseText);
+						updateTable(list,i,this.responseText,url1);
 				};
-				xhr1.open("GET","data/"+list[i].split(':')[1]+"-Auth.txt",true);
+				xhr1.open("GET",url1,false);
 				xhr1.send();
 			}
 		}
@@ -78,7 +79,7 @@ function fillTable(){
 // 	xhr1.send();
 // }
 
-function updateTable(list,i,resp){
+function updateTable(list,i,resp,url1){
 	authuser=resp.split(';');
 	for(j=0;j<authuser.length;j++)
 	{
