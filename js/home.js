@@ -49,19 +49,18 @@ $(function(){
 })
 
 function fillTable(){
+	count=1;
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
-		if(this.readyState==4 && this.status==200){
-			list=xhr.responseText.split(';');
-			for(i=0;i<list.length;i++){
-				url1="data/"+list[i].split(':')[1]+"-Auth.txt";
-				var xhr1=new XMLHttpRequest();
-				xhr1.onreadystatechange=function(){
-					if(this.readyState==4 && this.status==200)
-						updateTable(list,i,this.responseText,url1);
-				};
-				xhr1.open("GET",url1,false);
-				xhr1.send();
+		if(xhr.readyState==4 && xhr.status==200){
+			var repolist=xhr.responseText.split(';');
+			var repotable=document.getElementById("repolist");
+			for(i=0;i<repolist.length;i++){
+				if(sessionStorage["user"]==repolist[i].split(':')[0]){
+					var row=document.createElement("tr");
+					row.innerHTML="<td>"+(count++)+"</td><td>"+repolist[i].split(':')[0]+"</td><td><a href='homeview.php?repo="+repolist[i].split(':')[1]+"'>"+repolist[i].split(':')[1]+"</a></td>";
+					repotable.appendChild(row);
+				}
 			}
 		}
 	};
@@ -69,17 +68,36 @@ function fillTable(){
 	xhr.send();
 }
 
-count=1;
-function updateTable(list,i,resp,url1){
-	authuser=resp.split(';');
-	for(j=0;j<authuser.length;j++)
-	{
-		if(sessionStorage["user"]==authuser[j])
-		{
-			var repotable=document.getElementById("repolist");
-			var row=document.createElement("tr");
-			row.innerHTML="<td>"+(count++)+"</td><td>"+list[i].split(':')[0]+"</td><td><a href='authview.php?repo="+list[i].split(':')[1]+"'>"+list[i].split(':')[1]+"</a></td>";
-			repotable.appendChild(row);
-		}
+function newRepo(){
+	if(checkrepoexists(document.getElementById("reponame").value)==true){
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				document.getElementById("repolist").innerHTML="";
+				fillTable();
+				document.getElementById("reponame").value=null;
+				$('#newrepobtn').unbind('click');
+			}
+		};
+		xhr.open("GET","scripts/newrepo.php?repo="+sessionStorage["user"]+":"+document.getElementById("reponame").value,true);
+		xhr.send();
 	}
+}
+
+function checkrepoexists(repo){
+	var xhr=new XMLHttpRequest();
+	xhr.open("GET","scripts/checkrepo.php?repo="+repo,true);
+	xhr.onreadystatechange=function(){
+		if(this.readyState==4 && this.status==200){
+			if(this.responseText=="true"){
+				$('#newrepobtn').unbind('click');
+				return false;
+			}
+			else{
+				$("#newrepobtn").click(newRepo);
+				return true;
+			}
+		}
+	};
+	xhr.send();
 }

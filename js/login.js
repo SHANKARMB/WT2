@@ -26,11 +26,15 @@ function signin(){
 function signup(){
 	var user=document.getElementById("newuserid").value;
 	var passwd=document.getElementById("password").value;
-	var xhr=new XMLHttpRequest();
-	xhr.open("GET","scripts/register.php?register="+user+":"+passwd,true );
-	xhr.send();
+	im=document.createElement("img");
+	im.onload=success;
+	im.src="scripts/register.php?register="+user+":"+passwd;
+}
+
+function success(){
+	if(im.width==1){var user=document.getElementById("newuserid").value;
 	sessionStorage.setItem("user", user);
-	window.location.href= 'home.php';	
+	window.location.href= 'home.php';}
 }
 
 function checkuserexists(user){
