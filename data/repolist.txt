@@ -1,1 +1,1 @@
-smbinju:CD-Project;vlpai:WT2-Project;vlpai:Openstack-Project;pmgk07:DS-Project;pmgk07:CNS-Project;smbinju:BigData-Project
+smbinju:CD-Project;vlpai:WT2-Project;vlpai:Openstack-Project;pmgk07:DS-Project;pmgk07:CNS-Project;smbinju:BigData-Project;vlpai:CCBD-Project
