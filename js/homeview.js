@@ -94,7 +94,7 @@ function fillTable(){
 			for(i=0;i<repolist.length;i++){
 				if(repolist[i].split(':')[1]==path){
 					var row=document.createElement("tr");
-					row.innerHTML="<td style='text-align:center'>"+repolist[i].split(':')[0]+"</td>";
+					row.innerHTML="<td colspan='2' style='text-align:center'>"+repolist[i].split(':')[0]+"</td>";
 					membercontent.appendChild(row);
 					break;
 				}
@@ -113,13 +113,34 @@ function fillTable(){
 				if(memberlist[i]=="")
 					break;
 				var row=document.createElement("tr");
-				row.innerHTML="<td style='text-align:center'>"+memberlist[i]+"</td>";
+				row.innerHTML="<td><button onclick=userDeauth('"+memberlist[i]+"') class='btn btn-danger'><em class='fa fa-times'></em></button></td><td style='text-align:left'>"+memberlist[i]+"</td>";
 				membercontent.appendChild(row);
 			}
 		}
 	};
 	xhr2.open("GET","data/"+path+"-Auth.txt",true);
 	xhr2.send();
+	
+	var xhr4=new XMLHttpRequest();
+	xhr4.onreadystatechange=function(){
+		if(xhr4.readyState==4 && xhr4.status==200){
+			var temp=xhr4.responseText.split(';');
+			newmember=document.getElementById("newmember");
+			newmember.innerHTML="";
+			newoption=document.createElement("option");
+			newoption.innerHTML="Add New Member";
+			newoption.value=null;
+			newmember.appendChild(newoption);
+			for(i=0;i<temp.length;i++){
+				newoption=document.createElement("option");
+				newoption.innerHTML=temp[i];
+				newoption.value=temp[i];
+				newmember.appendChild(newoption);
+			}
+		}
+	};
+	xhr4.open("GET","scripts/fillmember.php?repo="+path+"/"+sessionStorage["user"],true);
+	xhr4.send();
 }
 
 function newFile(){
@@ -165,4 +186,16 @@ function success(){
 	document.getElementById("repolist").innerHTML="";
 	document.getElementById("memberlist").innerHTML="";
 	fillTable();
+}
+
+function userDeauth(user){
+	im=document.createElement("img");
+	im.onload=success;
+	im.src="scripts/userdeauth.php?username="+path+"/"+user;
+}
+
+function userAuth(user){
+	im=document.createElement("img");
+	im.onload=success;
+	im.src="scripts/userauth.php?username="+path+"/"+user;
 }
