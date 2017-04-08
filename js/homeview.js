@@ -56,6 +56,14 @@ vars[key] = value;
 return vars;
 }
 
+function editFile(id)
+{
+	vars=getUrlVars();
+	repo=vars["repo"];
+	file=$('#'+id).html();
+	window.location='repoedit.html?repo='+repo+'&file='+file,'_blank';
+}
+
 function fillTable(){
 	path = getUrlVars()["repo"];
 	var repoheading=document.getElementById("reponame");
@@ -74,7 +82,7 @@ function fillTable(){
 				xhr1.onreadystatechange=function(){
 					if(xhr1.readyState==4 && xhr1.status==200){
 						var row=document.createElement("tr");
-						row.innerHTML="<td><button class='btn btn-default'><em class='fa fa-pencil'></em></button><button onclick=fileDelete('"+sessionStorage["filepath"]+"') class='btn btn-danger'><em class='fa fa-trash'></em></button></td><td>"+xhr1.getResponseHeader("Last-Modified")+"</td><td><a>"+sessionStorage["filepath"]+"</a></td>";
+						row.innerHTML="<td><button class='btn btn-default' onclick='editFile("+i+")''><em class='fa fa-pencil'></em></button><button onclick=fileDelete('"+sessionStorage["filepath"]+"') class='btn btn-danger'><em class='fa fa-trash'></em></button></td><td>"+xhr1.getResponseHeader("Last-Modified")+"</td><td id="+i+">"+sessionStorage["filepath"]+"</td>";
 						repocontent.appendChild(row);
 					}
 				}
