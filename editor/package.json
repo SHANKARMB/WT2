@@ -1,0 +1,23 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "Repository Editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhoDisGeek/WT2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WhoDisGeek/WT2/issues"
+  },
+  "homepage": "https://github.com/WhoDisGeek/WT2#readme"
+}

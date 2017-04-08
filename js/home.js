@@ -69,7 +69,7 @@ function fillTable(){
 }
 
 function newRepo(){
-	if(checkrepoexists(document.getElementById("reponame").value)==true){
+	if(document.getElementById("reponame").value!=""){
 		var xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4 && xhr.status==200){
@@ -91,11 +91,9 @@ function checkrepoexists(repo){
 		if(this.readyState==4 && this.status==200){
 			if(this.responseText=="true"){
 				$('#newrepobtn').unbind('click');
-				return false;
 			}
 			else{
 				$("#newrepobtn").click(newRepo);
-				return true;
 			}
 		}
 	};
