@@ -161,6 +161,7 @@ function newFile(){
 				fillTable();
 				document.getElementById("filename").value=null;
 				$('#newfilebtn').unbind('click');
+				window.reload(true);
 			}
 		};
 		xhr.open("GET","scripts/newfile.php?filename="+path+":"+document.getElementById("filename").value,true);
@@ -194,6 +195,7 @@ function success(){
 	document.getElementById("repolist").innerHTML="";
 	document.getElementById("memberlist").innerHTML="";
 	fillTable();
+	window.reload(true);
 }
 
 function userDeauth(user){
