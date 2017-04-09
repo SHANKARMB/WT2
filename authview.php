@@ -12,6 +12,11 @@
 		function load(){
 			$(".username").html(sessionStorage["user"]);
 			fillTable();
+			window.setInterval(function(){
+				document.getElementById("repolist").innerHTML="";
+				document.getElementById("memberlist").innerHTML="";
+				fillTable();
+			},5000);
 			//startChat();
 		}
 	</script>
