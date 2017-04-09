@@ -1,6 +1,6 @@
 function mainFunction(dir,uname) {
-  console.log(dir);
-  console.log(uname);
+  //console.log(dir);
+  //console.log(uname);
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -27,13 +27,14 @@ function mainFunction(dir,uname) {
   var $currentInput = $usernameInput.focus();
 roomno=dir;
   var socket = io.connect("/",{query:"roomno="+dir});
-console.log(socket);
+//console.log(socket);
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant";
+      message += "You are all Alone !";
     } else {
-      message += "there are " + data.numUsers + " participants";
+
+      message +=  data.users + " are online";
     }
     log(message);
   }
@@ -48,7 +49,7 @@ console.log(socket);
       $chatPage.show();
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
-console.log("add user");
+//console.log("add user");
 var msg= JSON.stringify({username:username,roomno:roomno});
       // Tell the server your username
       socket.emit('add user',msg);
@@ -136,7 +137,7 @@ var msg= JSON.stringify({username:username,roomno:roomno});
         message: message
       });
       var msg=JSON.stringify({message:message,roomno:roomno});
-      console.log(msg);
+    //  console.log(msg);
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', msg);
     }
@@ -227,7 +228,7 @@ var msg= JSON.stringify({username:username,roomno:roomno});
   function updateTyping () {
     if (connected) {
       if (!typing) {
-        console.log("Typing");
+    //    console.log("Typing");
         typing = true;
         socket.emit('typing',roomno);
       }
