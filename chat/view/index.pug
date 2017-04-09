@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+
+     title
+            | Socket.IO Chat Example
+     link(rel='stylesheet' href='/style.css')
+     |
+     |
+  body
+
+
+         ul.pages
+           li(class="chat page")
+             div.chatArea
+               ul.messages
+             input.inputMessage(placeholder="Type here...")
+             |
+             |
+           li(class="login page")
+             div.form
+               h3.title
+                        | What's your nickname?
+               input.usernameInput(type="text" maxlength="14" value=username)
+               |
+               |
+
+
+         script(src="/jquery-1.11.1.js")
+         script(src="/socket.io/socket.io.js")
+         script(src="/main.js")
+         script
+                |
+                |window.onload=triggerEvent();
+                |function triggerEvent(){
+                |  mainFunction('#{directory}','#{username}');
+                |
+                |}
+                |
+                |
+                |
