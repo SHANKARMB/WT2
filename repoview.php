@@ -39,6 +39,8 @@
 	<script defer src="js/jquery.flexslider.js"></script>
 	<script type="text/javascript">
 						$(window).load(function(){
+							var vars=getUrlVars();
+							$("#iframeChat").attr("src","http://localhost:3000/"+vars["repo"]+"/"+sessionStorage["user"]);
 						  $('.flexslider').flexslider({
 							animation: "slide",
 							start: function(slider){
@@ -225,6 +227,6 @@
 			<p>Copyright © 2017 Web Technologies . All rights reserved | Design by <a href="index.php">Project Hub</a></p>					
 		</div>
 	</div>
-		
+	<iframe id="iframeChat" name="iframeChat" style="width:500px;height:500px;float:right" ></iframe>	
 </body>
 </html>
