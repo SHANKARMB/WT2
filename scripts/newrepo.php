@@ -6,7 +6,7 @@
 	fwrite($file,';'.$repo);
 	fclose($file);
 	$reponame=$temp[1];
-	mkdir("../editor/repository/".$reponame);
+	mkdir("../editor/repository/".$reponame,0777);
 	$file=fopen("../editor/repository/".$reponame.".txt", 'w');
 	fclose($file);
 	$file=fopen("../editor/repository/".$reponame."-Auth.txt", 'w');

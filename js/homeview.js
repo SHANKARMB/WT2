@@ -158,10 +158,9 @@ function newFile(){
 			if(xhr.readyState==4 && xhr.status==200){
 				document.getElementById("repolist").innerHTML="";
 				document.getElementById("memberlist").innerHTML="";
-				fillTable();
+				window.setTimeout(fillTable,200);
 				document.getElementById("filename").value=null;
 				$('#newfilebtn').unbind('click');
-				window.reload(true);
 			}
 		};
 		xhr.open("GET","scripts/newfile.php?filename="+path+":"+document.getElementById("filename").value,true);
@@ -195,7 +194,6 @@ function success(){
 	document.getElementById("repolist").innerHTML="";
 	document.getElementById("memberlist").innerHTML="";
 	fillTable();
-	window.reload(true);
 }
 
 function userDeauth(user){

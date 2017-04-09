@@ -17,7 +17,7 @@
 	</script>
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script src="js/homeview.js"></script>
+	<script src="js/authview.js"></script>
 	
 	<!--Fonts-->
 	<link href='https://fonts.googleapis.com/css?family=UnifrakturMaguntia' rel='stylesheet' type='text/css'>

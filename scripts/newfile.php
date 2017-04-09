@@ -11,7 +11,9 @@
 		$file=fopen("../editor/repository/".$inputcontent[0].".txt","a");
 		fwrite($file,';'.$inputcontent[1]);
 		fclose($file);
+		chmod("../editor/repository/".$inputcontent[0].".txt"	, 0777);
 	}
 	$file=fopen("../editor/repository/".$inputcontent[0]."/".$inputcontent[1], 'w');
 	fclose($file);
+	chmod("../editor/repository/".$inputcontent[0]."/".$inputcontent[1], 0777);
 ?>
