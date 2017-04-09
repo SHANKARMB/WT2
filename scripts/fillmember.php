@@ -1,5 +1,6 @@
 <?php
 	extract($_GET);
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	$repotemp=explode("/",$repo);
 	$f=file_get_contents("../editor/repository/".$repotemp[0]."-Auth.txt");
 	$g=file_get_contents("../editor/repository/users.txt");

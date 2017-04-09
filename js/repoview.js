@@ -63,21 +63,23 @@ function fillTable(){
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			filelist=xhr.responseText.split(';');
-			var repocontent=document.getElementById("repocontent");
-			for(i=0;i<filelist.length;i++){
-				var xhr1=new XMLHttpRequest();
-				var temppath=filelist[i];
-				sessionStorage.setItem("filepath",filelist[i]);
-				xhr1.onreadystatechange=function(){
-					if(xhr1.readyState==4 && xhr1.status==200){
-						var row=document.createElement("tr");
-						row.innerHTML="<td><a href='"+"editor/repository/"+path+"/"+sessionStorage["filepath"]+"' download>"+sessionStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
-						repocontent.appendChild(row);
+			if(xhr.responseText!=""){
+				filelist=xhr.responseText.split(';');
+				var repocontent=document.getElementById("repocontent");
+				for(i=0;i<filelist.length;i++){
+					var xhr1=new XMLHttpRequest();
+					var temppath=filelist[i];
+					sessionStorage.setItem("filepath",filelist[i]);
+					xhr1.onreadystatechange=function(){
+						if(xhr1.readyState==4 && xhr1.status==200){
+							var row=document.createElement("tr");
+							row.innerHTML="<td><a href='"+"editor/repository/"+path+"/"+sessionStorage["filepath"]+"' download>"+sessionStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
+							repocontent.appendChild(row);
+						}
 					}
+					xhr1.open("GET","editor/repository/"+path+"/"+filelist[i],false);
+					xhr1.send();
 				}
-				xhr1.open("GET","editor/repository/"+path+"/"+filelist[i],false);
-				xhr1.send();
 			}
 		}
 	};
