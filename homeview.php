@@ -10,6 +10,8 @@
 	<!--JavaScript-->
 	<script>
 		function load(){
+			var vars=getUrlVars();
+			$("#iframeChat").attr("src","http://localhost:3000/"+vars["repo"]+"/"+sessionStorage["user"]);
 			$(".username").html(sessionStorage["user"]);
 			fillTable();
 			window.setInterval(function(){
@@ -122,6 +124,6 @@
 			</div>
 		</center>
 	</div>
-	
+	<iframe id="iframeChat" name="iframeChat" style="width:500px;height:500px;float:right" ></iframe>
 </body>
 </html>
