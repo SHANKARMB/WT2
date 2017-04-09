@@ -2,7 +2,7 @@
 	header("Content-type:image/jpeg");
 	extract($_GET);
 	$temp=explode("/",$username);
-	$f=file_get_contents("../data/".$temp[0]."-Auth.txt");
+	$f=file_get_contents("../editor/repository/".$temp[0]."-Auth.txt");
 	$ftemp=explode(";",$f);
 	$stack=array();
 	foreach($ftemp as $existingfile){
@@ -10,7 +10,7 @@
 			array_push($stack,$existingfile);
 	}
 	$join=implode(";",$stack);
-	$file=fopen("../data/".$temp[0]."-Auth.txt","w");
+	$file=fopen("../editor/repository/".$temp[0]."-Auth.txt","w");
 	fwrite($file,$join);
 	fclose($file);
 	sleep(5);

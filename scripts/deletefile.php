@@ -2,16 +2,16 @@
 	header("Content-type:image/jpeg");
 	extract($_GET);
 	$temp=explode("/",$filename);
-	$f=file_get_contents("../data/".$temp[0].".txt");
+	$f=file_get_contents("../editor/repository/".$temp[0].".txt");
 	$ftemp=explode(";",$f);
-	unlink("../data/".$filename);
+	unlink("../editor/repository/".$filename);
 	$stack=array();
 	foreach($ftemp as $existingfile){
 		if($existingfile!=$temp[1])
 			array_push($stack,$existingfile);
 	}
 	$join=implode(";",$stack);
-	$file=fopen("../data/".$temp[0].".txt","w");
+	$file=fopen("../editor/repository/".$temp[0].".txt","w");
 	fwrite($file,$join);
 	fclose($file);
 	sleep(3);

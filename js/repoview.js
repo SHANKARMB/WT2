@@ -72,15 +72,15 @@ function fillTable(){
 				xhr1.onreadystatechange=function(){
 					if(xhr1.readyState==4 && xhr1.status==200){
 						var row=document.createElement("tr");
-						row.innerHTML="<td><a href='"+"data/"+path+"/"+sessionStorage["filepath"]+"' download>"+sessionStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
+						row.innerHTML="<td><a href='"+"editor/repository/"+path+"/"+sessionStorage["filepath"]+"' download>"+sessionStorage["filepath"]+"</a></td><td>"+xhr1.getResponseHeader("Content-Length")+"</td>";
 						repocontent.appendChild(row);
 					}
 				}
-				xhr1.open("GET","data/"+path+"/"+filelist[i],false);
+				xhr1.open("GET","editor/repository/"+path+"/"+filelist[i],false);
 				xhr1.send();
 			}
 		}
 	};
-	xhr.open("GET","data/"+path+".txt",true);
+	xhr.open("GET","editor/repository/"+path+".txt",true);
 	xhr.send();
 }

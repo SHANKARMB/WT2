@@ -1,7 +1,7 @@
 <?php
 	header("Content-type:image/jpeg");
 	extract($_GET);
-	$file=fopen("../data/users.txt","a");
+	$file=fopen("../editor/repository/users.txt","a");
 	fwrite($file,';'.$register);
 	fclose($file);
 	$im=imagecreate(1,1);

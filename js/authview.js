@@ -78,12 +78,12 @@ function fillTable(){
 						repocontent.appendChild(row);
 					}
 				}
-				xhr1.open("GET","data/"+path+"/"+filelist[i],false);
+				xhr1.open("GET","editor/repository/"+path+"/"+filelist[i],false);
 				xhr1.send();
 			}
 		}
 	};
-	xhr.open("GET","data/"+path+".txt",true);
+	xhr.open("GET","editor/repository/"+path+".txt",true);
 	xhr.send();
 	
 	var xhr3=new XMLHttpRequest();
@@ -101,7 +101,7 @@ function fillTable(){
 			}
 		}
 	};
-	xhr3.open("GET","data/repolist.txt",true);
+	xhr3.open("GET","editor/repository/repolist.txt",true);
 	xhr3.send();
 	
 	var xhr2=new XMLHttpRequest();
@@ -118,7 +118,7 @@ function fillTable(){
 			}
 		}
 	};
-	xhr2.open("GET","data/"+path+"-Auth.txt",true);
+	xhr2.open("GET","editor/repository/"+path+"-Auth.txt",true);
 	xhr2.send();
 }
 

@@ -54,7 +54,7 @@ function fillTable(){
 		if(this.readyState==4 && this.status==200){
 			list=xhr.responseText.split(';');
 			for(i=0;i<list.length;i++){
-				url1="data/"+list[i].split(':')[1]+"-Auth.txt";
+				url1="editor/repository/"+list[i].split(':')[1]+"-Auth.txt";
 				var xhr1=new XMLHttpRequest();
 				xhr1.onreadystatechange=function(){
 					if(this.readyState==4 && this.status==200)
@@ -65,7 +65,7 @@ function fillTable(){
 			}
 		}
 	};
-	xhr.open("GET","data/repolist.txt",true);
+	xhr.open("GET","editor/repository/repolist.txt",true);
 	xhr.send();
 }
 

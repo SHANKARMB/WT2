@@ -61,6 +61,6 @@ function fillTable(){
 			}
 		}
 	};
-	xhr.open("GET","data/repolist.txt",true);
+	xhr.open("GET","editor/repository/repolist.txt",true);
 	xhr.send();
 }

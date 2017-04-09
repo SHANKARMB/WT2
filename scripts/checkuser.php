@@ -1,5 +1,5 @@
 <?php
-	$f=file_get_contents("../data/users.txt");
+	$f=file_get_contents("../editor/repository/users.txt");
 	extract($_GET);
 	$users=explode(";",$f);
 	foreach($users as $user){

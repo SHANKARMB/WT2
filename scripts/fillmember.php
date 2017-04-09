@@ -1,8 +1,8 @@
 <?php
 	extract($_GET);
 	$repotemp=explode("/",$repo);
-	$f=file_get_contents("../data/".$repotemp[0]."-Auth.txt");
-	$g=file_get_contents("../data/users.txt");
+	$f=file_get_contents("../editor/repository/".$repotemp[0]."-Auth.txt");
+	$g=file_get_contents("../editor/repository/users.txt");
 	$ftemp=explode(";",$f);
 	$gtemp=explode(";",$g);
 	$final=array();

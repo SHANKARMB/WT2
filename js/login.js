@@ -19,7 +19,7 @@ function signin(){
 				document.getElementById("errorlogin").innerHTML="Invalid Credentials";
 		}
 	};
-	xhr.open("GET","data/users.txt",true );
+	xhr.open("GET","editor/repository/users.txt",true );
 	xhr.send();
 }
 

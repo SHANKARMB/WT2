@@ -1,5 +1,5 @@
 <?php
-	$f=file_get_contents("../data/repolist.txt");
+	$f=file_get_contents("../editor/repository/repolist.txt");
 	extract($_GET);
 	$repolist=explode(";",$f);
 	foreach($repolist as $reponame){

@@ -1,13 +1,13 @@
 <?php
 	extract($_GET);
 	$temp=explode(":",$repo);
-	$file=fopen("../data/repolist.txt","a");
+	$file=fopen("../editor/repository/repolist.txt","a");
 	fwrite($file,';'.$repo);
 	fclose($file);
 	$reponame=$temp[1];
-	mkdir("../data/".$reponame);
-	$file=fopen("../data/".$reponame.".txt", 'w');
+	mkdir("../editor/repository/".$reponame);
+	$file=fopen("../editor/repository/".$reponame.".txt", 'w');
 	fclose($file);
-	$file=fopen("../data/".$reponame."-Auth.txt", 'w');
+	$file=fopen("../editor/repository/".$reponame."-Auth.txt", 'w');
 	fclose($file);
 ?>
