@@ -29,17 +29,18 @@ app.get("/:dir/:uname",function(req,res){
 
 
 http.listen(3000, function(){
-  console.log('listening on localhost:3000');
+  //console.log('listening on localhost:3000');
 });
 
 
 
 // Chatroom
 
-var numUsers = 0;
+var users = [];
 
 io.on('connection', function (socket) {
-socket.join(socket.request._query['roomno']);
+  var rno=socket.request._query['roomno'];
+socket.join(rno);
 
   //console.log("SOCKET=> ",socket,"############################################");
   //console.log("ROOMS=> ",socket.nsp.server.sockets.adapter.rooms,"---------------------------------------------");
@@ -59,10 +60,10 @@ socket.join(socket.request._query['roomno']);
   socket.on('new message', function (msg) {
 
     msg=JSON.parse(msg);
-    console.log(msg);
+  //  console.log(msg);
     var data=msg.message;
     var roomno=msg.roomno;
-    console.log("new message bantu ",data," -- ",roomno);
+  //  console.log("new message bantu ",data," -- ",roomno);
     // we tell the client to execute 'new message'
     socket.broadcast.to(roomno).emit('new message', {
       username: socket.username,
@@ -73,22 +74,36 @@ socket.join(socket.request._query['roomno']);
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (msg) {
   msg=JSON.parse(msg);
-    console.log(msg);
+  //  console.log(msg);
     var username=msg.username;
     var roomno=msg.roomno;
+    if(users[msg.roomno]==undefined)users[msg.roomno]=msg.username;
+    else users[msg.roomno]+=" & "+msg.username;
+
+
     if (addedUser) return;
 
     // we store the username in the socket session for this client
     socket.username = username;
-    ++numUsers;
+    // we store the roomno in the socket session for this client
+    socket.roomno=roomno;
+    // we store the roomno in the socket session for this client
+    socket.numUsers=io.nsps['/'].adapter.rooms[roomno].length;
+
+  //  console.log("users of room ", msg.roomno," are ",users[msg.roomno]," with ",socket.numUsers," # of users");
+
     addedUser = true;
     socket.emit('login', {
-      numUsers: numUsers
+      users:users[socket.roomno],
+      username: socket.username,
+      numUsers: socket.numUsers
     });
+
     // echo globally (all clients) that a person has connected
     socket.broadcast.to(roomno).emit('user joined', {
+      users:users[socket.roomno],
       username: socket.username,
-      numUsers: numUsers
+      numUsers: socket.numUsers
     });
   });
 
@@ -107,14 +122,22 @@ socket.join(socket.request._query['roomno']);
   });
 
   // when the user disconnects.. perform this
-  socket.on('disconnect', function (roomno) {
+  socket.on('disconnect', function () {
     if (addedUser) {
-      --numUsers;
-console.log(roomno);
+      if(io.nsps['/'].adapter.rooms[socket.roomno]!=undefined) socket.numUsers=io.nsps['/'].adapter.rooms[socket.roomno].length;
+      else socket.numUsers=0;
+
+      var usersArray=users[socket.roomno].split(" & ");
+      var index=-1;
+      index=usersArray.indexOf(socket.username);
+      if(index!=-1){usersArray.splice(index,1);users[socket.roomno]=usersArray.join(" & ");}
+//console.log("user " , socket.username," left & " , " room " , socket.roomno , " has " , socket.numUsers , " # of users");
+//console.log(roomno);
       // echo globally that this client has left
-      socket.broadcast.emit('user left', {
+      socket.broadcast.to(socket.roomno).emit('user left', {
+        users:users[socket.roomno],
         username: socket.username,
-        numUsers: numUsers
+        numUsers: socket.numUsers
       });
     }
   });
