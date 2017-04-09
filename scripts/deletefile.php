@@ -1,5 +1,6 @@
 <?php
 	header("Content-type:image/jpeg");
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	extract($_GET);
 	$temp=explode("/",$filename);
 	$f=file_get_contents("../editor/repository/".$temp[0].".txt");
@@ -14,7 +15,6 @@
 	$file=fopen("../editor/repository/".$temp[0].".txt","w");
 	fwrite($file,$join);
 	fclose($file);
-	sleep(3);
 	$im=imagecreate(1,1);
 	imagecolorallocate($im,0,0,0);
 	imagejpeg($im);

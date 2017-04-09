@@ -1,4 +1,5 @@
 <?php
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	extract($_GET);
 	$temp=explode(":",$repo);
 	$file=fopen("../editor/repository/repolist.txt","a");
