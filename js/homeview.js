@@ -175,7 +175,7 @@ function checkfileexists(file){
 		if(this.readyState==4 && this.status==200){
 			if(this.responseText=="true"){
 				$('#newfilebtn').unbind('click');
-			}
+			}	
 			else{
 				$("#newfilebtn").click(newFile);
 			}

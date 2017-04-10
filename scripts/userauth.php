@@ -1,5 +1,6 @@
 <?php
 	extract($_GET);
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	$inputcontent=explode("/",$username);
 	if(file_get_contents("../editor/repository/".$inputcontent[0]."-Auth.txt")==""){
 		$file=fopen("../editor/repository/".$inputcontent[0]."-Auth.txt","a");

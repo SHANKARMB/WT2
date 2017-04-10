@@ -124,6 +124,6 @@
 			</div>
 		</center>
 	</div>
-	<iframe id="iframeChat" name="iframeChat" style="width:500px;height:500px;float:right" ></iframe>
+	
 </body>
 </html>

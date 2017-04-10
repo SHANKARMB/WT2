@@ -227,6 +227,6 @@
 			<p>Copyright © 2017 Web Technologies . All rights reserved | Design by <a href="index.php">Project Hub</a></p>					
 		</div>
 	</div>
-	<iframe id="iframeChat" name="iframeChat" style="width:500px;height:500px;float:right" ></iframe>	
+	
 </body>
 </html>

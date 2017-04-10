@@ -1,1 +1,1 @@
-ActualContents;NewFile;FIle3;File2;foo
+ActualContents;NewFile;FIle3;File2;FIle

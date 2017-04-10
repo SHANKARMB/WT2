@@ -1,5 +1,6 @@
 <?php
 	header("Content-type:image/jpeg");
+	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 	extract($_GET);
 	$temp=explode("/",$username);
 	$f=file_get_contents("../editor/repository/".$temp[0]."-Auth.txt");

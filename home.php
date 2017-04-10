@@ -11,6 +11,10 @@
 		function load(){
 			$(".username").html(sessionStorage["user"]);
 			fillTable();
+			window.setInterval(function(){
+				document.getElementById("repolist").innerHTML="";
+				fillTable();
+			},5000);
 		}
 	</script>
 	<script src="js/jquery-1.11.1.min.js"></script>
